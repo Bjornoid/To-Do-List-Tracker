@@ -1,0 +1,17 @@
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\bin\Release\net6.0-windows\To-Do List Tracker.exe
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\bin\Release\net6.0-windows\To-Do List Tracker.deps.json
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\bin\Release\net6.0-windows\To-Do List Tracker.runtimeconfig.json
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\bin\Release\net6.0-windows\To-Do List Tracker.dll
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\bin\Release\net6.0-windows\To-Do List Tracker.pdb
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\obj\Release\net6.0-windows\To-Do List Tracker.csproj.AssemblyReference.cache
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\obj\Release\net6.0-windows\To_Do_List_Tracker.Form1.resources
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\obj\Release\net6.0-windows\To-Do List Tracker.csproj.GenerateResource.cache
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\obj\Release\net6.0-windows\To-Do List Tracker.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\obj\Release\net6.0-windows\To-Do List Tracker.AssemblyInfoInputs.cache
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\obj\Release\net6.0-windows\To-Do List Tracker.AssemblyInfo.cs
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\obj\Release\net6.0-windows\To-Do List Tracker.csproj.CoreCompileInputs.cache
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\obj\Release\net6.0-windows\To-Do List Tracker.dll
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\obj\Release\net6.0-windows\refint\To-Do List Tracker.dll
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\obj\Release\net6.0-windows\To-Do List Tracker.pdb
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\obj\Release\net6.0-windows\To-Do List Tracker.genruntimeconfig.cache
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\obj\Release\net6.0-windows\ref\To-Do List Tracker.dll

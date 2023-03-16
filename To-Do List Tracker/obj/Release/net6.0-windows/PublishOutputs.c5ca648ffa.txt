@@ -1,0 +1,5 @@
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\bin\Release\net6.0-windows\publish\To-Do List Tracker.exe
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\bin\Release\net6.0-windows\publish\To-Do List Tracker.dll
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\bin\Release\net6.0-windows\publish\To-Do List Tracker.deps.json
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\bin\Release\net6.0-windows\publish\To-Do List Tracker.runtimeconfig.json
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\bin\Release\net6.0-windows\publish\To-Do List Tracker.pdb
