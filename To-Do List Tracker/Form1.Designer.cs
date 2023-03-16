@@ -32,6 +32,7 @@
             button1 = new Button();
             label2 = new Label();
             label4 = new Label();
+            button2 = new Button();
             SuspendLayout();
             // 
             // label1
@@ -74,20 +75,31 @@
             label4.Location = new Point(562, 25);
             label4.Name = "label4";
             label4.Size = new Size(285, 45);
-            label4.TabIndex = 4;
+            label4.TabIndex = 3;
             label4.Text = "TO-DO List Tracker";
+            // 
+            // button2
+            // 
+            button2.Location = new Point(641, 102);
+            button2.Name = "button2";
+            button2.Size = new Size(105, 23);
+            button2.TabIndex = 4;
+            button2.Text = "- Remove Task";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1530, 650);
+            Controls.Add(button2);
             Controls.Add(label4);
             Controls.Add(label2);
             Controls.Add(button1);
             Controls.Add(label1);
             Name = "Form1";
-            Text = "Form1";
+            Text = "TO-DO List Tracker";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -98,5 +110,6 @@
         private Button button1;
         private Label label2;
         private Label label4;
+        private Button button2;
     }
 }

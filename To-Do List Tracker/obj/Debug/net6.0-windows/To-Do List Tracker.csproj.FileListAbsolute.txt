@@ -15,3 +15,4 @@ C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\obj\Debug\net6
 C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\obj\Debug\net6.0-windows\To-Do List Tracker.pdb
 C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\obj\Debug\net6.0-windows\To-Do List Tracker.genruntimeconfig.cache
 C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\obj\Debug\net6.0-windows\ref\To-Do List Tracker.dll
+C:\Users\Bjorn\source\repos\To-Do-List-Tracker\To-Do List Tracker\bin\Debug\net6.0-windows\To-Do List Tracker.dll.config
