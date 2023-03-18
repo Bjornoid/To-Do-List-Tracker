@@ -42,9 +42,10 @@
             label1.ForeColor = Color.Green;
             label1.Location = new Point(211, 35);
             label1.Name = "label1";
-            label1.Size = new Size(140, 32);
+            label1.Size = new Size(94, 32);
             label1.TabIndex = 0;
-            label1.Text = "My TO-DOs";
+            label1.Text = "TO-DO:";
+            label1.Hide();
             // 
             // button1
             // 
@@ -63,9 +64,10 @@
             label2.ForeColor = Color.Red;
             label2.Location = new Point(1096, 35);
             label2.Name = "label2";
-            label2.Size = new Size(131, 32);
+            label2.Size = new Size(105, 32);
             label2.TabIndex = 2;
-            label2.Text = "Due Date's";
+            label2.Text = "Do-Date";
+            label2.Hide();
             // 
             // label4
             // 
@@ -86,7 +88,6 @@
             button2.TabIndex = 4;
             button2.Text = "- Remove Task";
             button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
             // 
             // Form1
             // 
