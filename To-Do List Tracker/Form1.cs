@@ -14,36 +14,57 @@ namespace To_Do_List_Tracker
             InitializeComponent();
         }
 
-        private Dictionary<int, string> toDoListTasks = new Dictionary<int, string>(20);
+        private Dictionary<int, string> toDoListTasks = new Dictionary<int, string>();
 
-        private string task, date;
-        private int taskNumber;
+        private List<int> removed = new List<int>();
+        private string task = "";
+        private string date = "Today";
+        private int taskNumber = 0;
+        private int toRemove = 0;
         private TextBox tempBox;
         private DateTimePicker tempDate;
         private Button confirm;
         private Button cancel;
+        private Label taskToRemove;
+        private ListBox numberPicker;
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (Controls.Contains(confirm))
+                Controls.Remove(confirm);
+            if (Controls.Contains(cancel))
+                Controls.Remove(cancel);
+            if (Controls.Contains(numberPicker))
+                Controls.Remove(numberPicker);
+            if (Controls.Contains(taskToRemove))
+                Controls.Remove(taskToRemove);
+             if (Controls.Contains(tempBox))
+                Controls.Remove(tempBox);
+            if (Controls.Contains(tempDate))
+                Controls.Remove(tempDate);
+            if (toDoListTasks.Count == 36)
+            {
+                MessageBox.Show("To-Do List Full, Finish or Remove a To-Do first.", "List Full");
+                return;
+            }
             tempBox = new TextBox();
-            tempBox.Location = new Point(label1.Location.X, label1.Location.Y + 45);
             tempBox.Size = new Size(200, 32);
             tempBox.TextChanged += TempBox_TextChanged;
+            tempBox.Location = new Point(label1.Location.X, label1.Location.Y + 45);
             tempDate = new DateTimePicker();
-            tempDate.Location = new Point(label2.Location.X - 50, label2.Location.Y + 45);
             tempDate.Size = new Size(200, 32);
             tempDate.TextChanged += TempDate_TextChanged;
+            tempDate.Location = new Point(label2.Location.X - 50, label2.Location.Y + 45);
             confirm = new Button();
-            confirm.Location = new Point(button1.Location.X + 115, button1.Location.Y);
             confirm.Size = new Size(60, 23);
             confirm.Text = "Confirm";
             confirm.Click += Confirm_Click;
             cancel = new Button();
-            cancel.Location = new Point(button1.Location.X + 115, button1.Location.Y + 32);
             cancel.Size = new Size(60, 23);
             cancel.Text = "Cancel";
             cancel.Click += Cancel_Click;
-
+            confirm.Location = new Point(button1.Location.X + 115, button1.Location.Y);
+            cancel.Location = new Point(button1.Location.X + 115, button1.Location.Y + 32);
             label1.Show();
             label2.Show();
             Controls.Add(tempBox);
@@ -54,7 +75,23 @@ namespace To_Do_List_Tracker
 
         private void Confirm_Click(object? sender, EventArgs e)
         {
-            taskNumber = toDoListTasks.Count + 1;
+            if(removed.Count > 0)
+            {
+                int lowest = removed[0];
+                foreach (int num in removed)
+                {
+                    if (num < lowest)
+                    {
+                        lowest = num;
+                    }
+                }
+                taskNumber = lowest;
+                removed.Remove(lowest);
+            }
+            else
+            {
+                taskNumber = toDoListTasks.Count + 1;
+            }
             toDoListTasks[taskNumber] = task + date;
             DisplayTasks();
             Controls.Remove(tempBox);
@@ -90,14 +127,107 @@ namespace To_Do_List_Tracker
             for (int i = 1; i <= toDoListTasks.Count; i++)
             {
                 TextBox taskBox = new TextBox();
-                taskBox.Location = new Point(label1.Location.X - 100, label1.Location.Y + 100 + (i * 40));
                 taskBox.Size = new Size(300, 32);
+                if (!toDoListTasks.ContainsKey(i))
+                {
+                    continue;
+                }
                 taskBox.AppendText(i.ToString() + " : " + toDoListTasks[i]);
-
-
-
+                if (i < 13)
+                {
+                    taskBox.Location = new Point(label1.Location.X - 100, label1.Location.Y + 100 + (i * 40));
+                }
+                else if (i < 25)
+                {
+                    taskBox.Location = new Point(button2.Location.X - 85, button2.Location.Y + 33 + (i - 12) * 40);
+                }
+                else
+                {
+                    taskBox.Location = new Point(label2.Location.X - 80, label2.Location.Y + 100 + (i - 24) * 40);
+                }
                 Controls.Add(taskBox);
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (Controls.Contains(confirm))
+                Controls.Remove(confirm);
+            if (Controls.Contains(cancel))
+                Controls.Remove(cancel);
+            if (Controls.Contains(tempBox))
+                Controls.Remove(tempBox);
+            if (Controls.Contains(tempDate))
+                Controls.Remove(tempDate);
+            if (toDoListTasks.Count == 0) { return; }
+            taskToRemove = new Label();
+            taskToRemove.Text = "Task# to remove: ";
+            taskToRemove.Location = new Point(button2.Location.X - 40, button2.Location.Y + 40);
+            taskToRemove.Size = new Size(100, 32);
+            taskToRemove.AutoSize = true;
+            numberPicker = new ListBox();
+            numberPicker.Location = new Point(taskToRemove.Location.X + 100, taskToRemove.Location.Y);
+            numberPicker.Size = new Size(40, 40);
+            for (int i = 1; i <= toDoListTasks.Count + removed.Count; i++)
+            {
+                    if (removed.Contains(i))
+                        continue;
+                    numberPicker.Items.Add(i);
+            }
+            numberPicker.SelectedIndexChanged += NumberPicker_SelectedIndexChanged;
+            confirm = new Button();
+            confirm.Size = new Size(60, 23);
+            confirm.Text = "Confirm";
+            confirm.Click += Confirm_Click1;
+            cancel = new Button();
+            cancel.Size = new Size(60, 23);
+            cancel.Text = "Cancel";
+            cancel.Click += Cancel_Click1;
+            confirm.Location = new Point(button1.Location.X + 115, button1.Location.Y);
+            cancel.Location = new Point(button1.Location.X + 115, button1.Location.Y + 32);
+
+            Controls.Add(taskToRemove);
+            Controls.Add(numberPicker);
+            Controls.Add(cancel);
+            Controls.Add(confirm);
+        }
+
+        private void NumberPicker_SelectedIndexChanged(object? sender, EventArgs e)
+        {
+            numberPicker.SelectedIndex = numberPicker.SelectedIndex;
+        }
+
+        private void Cancel_Click1(object? sender, EventArgs e)
+        {
+            Controls.Remove(numberPicker);
+            Controls.Remove(taskToRemove);
+            Controls.Remove(confirm);
+            Controls.Remove(cancel);
+            label1.Hide();
+            label2.Hide();
+        }
+
+        private void Confirm_Click1(object? sender, EventArgs e)
+        {
+            toRemove = (int)numberPicker.SelectedIndex + 1;
+            toDoListTasks.Remove(toRemove);
+            foreach (Control c in Controls)
+            {
+                if (c.Text.StartsWith(toRemove.ToString()))
+                {
+                    Controls.Remove(c);
+                }
+            }
+            removed.Add(toRemove);
+                
+            DisplayTasks();
+
+            Controls.Remove(numberPicker);
+            Controls.Remove(taskToRemove);
+            Controls.Remove(confirm);
+            Controls.Remove(cancel);
+            label1.Hide();
+            label2.Hide();
         }
     }
 }
