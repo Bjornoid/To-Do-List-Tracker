@@ -33,6 +33,8 @@
             label2 = new Label();
             label4 = new Label();
             button2 = new Button();
+            button3 = new Button();
+            button4 = new Button();
             SuspendLayout();
             // 
             // label1
@@ -45,11 +47,10 @@
             label1.Size = new Size(94, 32);
             label1.TabIndex = 0;
             label1.Text = "TO-DO:";
-            label1.Hide();
             // 
             // button1
             // 
-            button1.Location = new Point(641, 73);
+            button1.Location = new Point(691, 73);
             button1.Name = "button1";
             button1.Size = new Size(105, 23);
             button1.TabIndex = 1;
@@ -67,7 +68,6 @@
             label2.Size = new Size(105, 32);
             label2.TabIndex = 2;
             label2.Text = "Do-Date";
-            label2.Hide();
             // 
             // label4
             // 
@@ -82,7 +82,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(641, 102);
+            button2.Location = new Point(691, 102);
             button2.Name = "button2";
             button2.Size = new Size(105, 23);
             button2.TabIndex = 4;
@@ -90,11 +90,33 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // button3
+            // 
+            button3.Location = new Point(596, 73);
+            button3.Name = "button3";
+            button3.Size = new Size(89, 23);
+            button3.TabIndex = 5;
+            button3.Text = "+ Add Details";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(596, 102);
+            button4.Name = "button4";
+            button4.Size = new Size(89, 23);
+            button4.TabIndex = 6;
+            button4.Text = ">View Details";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1530, 650);
+            Controls.Add(button4);
+            Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(label4);
             Controls.Add(label2);
@@ -113,5 +135,7 @@
         private Label label2;
         private Label label4;
         private Button button2;
+        private Button button3;
+        private Button button4;
     }
 }

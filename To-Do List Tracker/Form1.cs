@@ -1,4 +1,5 @@
 using System;
+using System.CodeDom;
 using System.Configuration.Internal;
 using System.DirectoryServices;
 using System.Runtime.CompilerServices;
@@ -15,18 +16,24 @@ namespace To_Do_List_Tracker
         }
 
         private Dictionary<int, string> toDoListTasks = new Dictionary<int, string>();
+        private List<string> details = new List<string>(36);
 
+        private RichTextBox detailText = new RichTextBox();
+        private Label addDetails = new Label();
         private List<int> removed = new List<int>();
         private string task = "";
         private string date = "Today";
         private int taskNumber = 0;
         private int toRemove = 0;
+        private int detailsIndex = 0;
         private TextBox tempBox;
         private DateTimePicker tempDate;
         private Button confirm;
         private Button cancel;
         private Label taskToRemove;
+        private Label detailsNum;
         private ListBox numberPicker;
+        private Button close = new Button();
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -34,14 +41,22 @@ namespace To_Do_List_Tracker
                 Controls.Remove(confirm);
             if (Controls.Contains(cancel))
                 Controls.Remove(cancel);
+            if (Controls.Contains(detailsNum))
+                Controls.Remove(detailsNum);
             if (Controls.Contains(numberPicker))
                 Controls.Remove(numberPicker);
             if (Controls.Contains(taskToRemove))
                 Controls.Remove(taskToRemove);
-             if (Controls.Contains(tempBox))
+            if (Controls.Contains(tempBox))
                 Controls.Remove(tempBox);
             if (Controls.Contains(tempDate))
                 Controls.Remove(tempDate);
+            if (Controls.Contains(detailText))
+                Controls.Remove(detailText);
+            if (Controls.Contains(addDetails))
+                Controls.Remove(addDetails);
+            if (Controls.Contains(close))
+                Controls.Remove(close);
             if (toDoListTasks.Count == 36)
             {
                 MessageBox.Show("To-Do List Full, Finish or Remove a To-Do first.", "List Full");
@@ -75,7 +90,7 @@ namespace To_Do_List_Tracker
 
         private void Confirm_Click(object? sender, EventArgs e)
         {
-            if(removed.Count > 0)
+            if (removed.Count > 0)
             {
                 int lowest = removed[0];
                 foreach (int num in removed)
@@ -93,6 +108,7 @@ namespace To_Do_List_Tracker
                 taskNumber = toDoListTasks.Count + 1;
             }
             toDoListTasks[taskNumber] = task + date;
+            details.Add("");
             DisplayTasks();
             Controls.Remove(tempBox);
             Controls.Remove(tempDate);
@@ -136,6 +152,7 @@ namespace To_Do_List_Tracker
                 if (i < 13)
                 {
                     taskBox.Location = new Point(label1.Location.X - 100, label1.Location.Y + 100 + (i * 40));
+
                 }
                 else if (i < 25)
                 {
@@ -145,6 +162,7 @@ namespace To_Do_List_Tracker
                 {
                     taskBox.Location = new Point(label2.Location.X - 80, label2.Location.Y + 100 + (i - 24) * 40);
                 }
+
                 Controls.Add(taskBox);
             }
         }
@@ -159,6 +177,14 @@ namespace To_Do_List_Tracker
                 Controls.Remove(tempBox);
             if (Controls.Contains(tempDate))
                 Controls.Remove(tempDate);
+            if (Controls.Contains(numberPicker))
+                Controls.Remove(numberPicker);
+            if (Controls.Contains(detailsNum))
+                Controls.Remove(detailsNum);
+            if (Controls.Contains(detailText))
+                Controls.Remove(detailText);
+            if (Controls.Contains(addDetails))
+                Controls.Remove(addDetails);
             if (toDoListTasks.Count == 0) { return; }
             taskToRemove = new Label();
             taskToRemove.Text = "Task# to remove: ";
@@ -170,9 +196,9 @@ namespace To_Do_List_Tracker
             numberPicker.Size = new Size(40, 40);
             for (int i = 1; i <= toDoListTasks.Count + removed.Count; i++)
             {
-                    if (removed.Contains(i))
-                        continue;
-                    numberPicker.Items.Add(i);
+                if (removed.Contains(i))
+                    continue;
+                numberPicker.Items.Add(i);
             }
             numberPicker.SelectedIndexChanged += NumberPicker_SelectedIndexChanged;
             confirm = new Button();
@@ -211,6 +237,7 @@ namespace To_Do_List_Tracker
         {
             toRemove = (int)numberPicker.SelectedIndex + 1;
             toDoListTasks.Remove(toRemove);
+
             foreach (Control c in Controls)
             {
                 if (c.Text.StartsWith(toRemove.ToString()))
@@ -219,7 +246,7 @@ namespace To_Do_List_Tracker
                 }
             }
             removed.Add(toRemove);
-                
+
             DisplayTasks();
 
             Controls.Remove(numberPicker);
@@ -228,6 +255,178 @@ namespace To_Do_List_Tracker
             Controls.Remove(cancel);
             label1.Hide();
             label2.Hide();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (Controls.Contains(confirm))
+                Controls.Remove(confirm);
+            if (Controls.Contains(cancel))
+                Controls.Remove(cancel);
+            if (Controls.Contains(tempBox))
+                Controls.Remove(tempBox);
+            if (Controls.Contains(tempDate))
+                Controls.Remove(tempDate);
+            if (Controls.Contains(numberPicker))
+                Controls.Remove(numberPicker);
+            if (Controls.Contains(detailsNum))
+                Controls.Remove(detailsNum);
+            if (Controls.Contains(detailText))
+                Controls.Remove(detailText);
+            if (Controls.Contains(addDetails))
+                Controls.Remove(addDetails);
+            if (toDoListTasks.Count == 0) { return; }
+            detailsNum = new Label();
+            detailsNum.Text = "Task Number: ";
+            detailsNum.Location = new Point(button2.Location.X - 40, button2.Location.Y + 40);
+            detailsNum.Size = new Size(100, 32);
+            detailsNum.AutoSize = true;
+            numberPicker = new ListBox();
+            numberPicker.Location = new Point(detailsNum.Location.X + 100, detailsNum.Location.Y);
+            numberPicker.Size = new Size(40, 40);
+            for (int i = 1; i <= toDoListTasks.Count + removed.Count; i++)
+            {
+                if (removed.Contains(i))
+                    continue;
+                numberPicker.Items.Add(i);
+            }
+            numberPicker.SelectedIndex = 0;
+            numberPicker.SelectedIndexChanged += NumberPicker_SelectedIndexChanged;
+            detailText = new RichTextBox();
+            detailText.Location = new Point(label1.Location.X, label1.Location.Y - 30);
+            detailText.Size = new Size(200, 150);
+            addDetails = new Label();
+            addDetails.Text = "Add Details: ";
+            addDetails.Location = new Point(detailText.Location.X - 80, detailText.Location.Y);
+            addDetails.Size = new Size(60, 32);
+            addDetails.AutoSize = true;
+            confirm = new Button();
+            confirm.Size = new Size(60, 23);
+            confirm.Text = "Confirm";
+            confirm.Click += Confirm_Click2;
+            cancel = new Button();
+            cancel.Size = new Size(60, 23);
+            cancel.Text = "Cancel";
+            cancel.Click += Cancel_Click2; 
+            confirm.Location = new Point(button1.Location.X + 115, button1.Location.Y);
+            cancel.Location = new Point(button1.Location.X + 115, button1.Location.Y + 32);
+
+            Controls.Add(addDetails);
+            Controls.Add(detailText);
+            Controls.Add(detailsNum);
+            Controls.Add(numberPicker);
+            Controls.Add(cancel);
+            Controls.Add(confirm);
+        }
+
+        private void Confirm_Click2(object? sender, EventArgs e)
+        {
+            detailsIndex = (int)numberPicker.SelectedIndex;
+            details.Insert(detailsIndex, detailText.Text);
+            Controls.Remove(addDetails);
+            Controls.Remove(numberPicker);
+            Controls.Remove(detailText);
+            Controls.Remove(detailsNum);
+            Controls.Remove(confirm);
+            Controls.Remove(cancel);
+        }
+
+        private void Cancel_Click2(object? sender, EventArgs e)
+        {
+            Controls.Remove(addDetails);
+            Controls.Remove(numberPicker);
+            Controls.Remove(detailText);
+            Controls.Remove(detailsNum);
+            Controls.Remove(confirm);
+            Controls.Remove(cancel);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (Controls.Contains(confirm))
+                Controls.Remove(confirm);
+            if (Controls.Contains(cancel))
+                Controls.Remove(cancel);
+            if (Controls.Contains(tempBox))
+                Controls.Remove(tempBox);
+            if (Controls.Contains(tempDate))
+                Controls.Remove(tempDate);
+            if (Controls.Contains(numberPicker))
+                Controls.Remove(numberPicker);
+            if (Controls.Contains(detailsNum))
+                Controls.Remove(detailsNum);
+            if (Controls.Contains(detailText))
+                Controls.Remove(detailText);
+            if (Controls.Contains(addDetails))
+                Controls.Remove(addDetails);
+            if (toDoListTasks.Count == 0) { return; }
+            detailsNum = new Label();
+            detailsNum.Text = "Task Number: ";
+            detailsNum.Location = new Point(button2.Location.X - 40, button2.Location.Y + 40);
+            detailsNum.Size = new Size(100, 32);
+            detailsNum.AutoSize = true;
+            confirm = new Button();
+            confirm.Size = new Size(60, 23);
+            confirm.Text = "Confirm";
+            confirm.Click += Confirm_Click3; ;
+            cancel = new Button();
+            cancel.Size = new Size(60, 23);
+            cancel.Text = "Cancel";
+            cancel.Click += Cancel_Click2;
+            confirm.Location = new Point(button1.Location.X + 115, button1.Location.Y);
+            cancel.Location = new Point(button1.Location.X + 115, button1.Location.Y + 32);
+            numberPicker = new ListBox();
+            numberPicker.Location = new Point(detailsNum.Location.X + 100, detailsNum.Location.Y);
+            numberPicker.Size = new Size(40, 40);
+            for (int i = 1; i <= toDoListTasks.Count + removed.Count; i++)
+            {
+                if (removed.Contains(i))
+                    continue;
+                numberPicker.Items.Add(i);
+            }
+            numberPicker.SelectedIndex = 0;
+            numberPicker.SelectedIndexChanged += NumberPicker_SelectedIndexChanged;
+
+            Controls.Add(detailsNum);
+            Controls.Add(numberPicker);
+            Controls.Add(cancel);
+            Controls.Add(confirm);
+        }
+
+        private void Confirm_Click3(object? sender, EventArgs e)
+        {
+            detailText = new RichTextBox();
+            detailText.Location = new Point(label1.Location.X, label1.Location.Y - 30);
+            detailText.Size = new Size(200, 150);
+            if (details[(int)numberPicker.SelectedIndex] == "")
+                detailText.Text = "No Details Yet";
+            else
+                detailText.Text = details[(int)numberPicker.SelectedIndex];
+            addDetails = new Label();
+            addDetails.Text = "Details: ";
+            addDetails.Location = new Point(detailText.Location.X - 80, detailText.Location.Y);
+            addDetails.Size = new Size(60, 32);
+            addDetails.AutoSize = true;
+            Controls.Add(detailText);
+            Controls.Add(addDetails);
+            close = new Button();
+            close.Text = "Close";
+            close.Location = new Point(addDetails.Location.X, addDetails.Location.Y + 50);
+            close.Size = new Size(60, 32);
+            close.Click += Close_Click;
+            Controls.Add(close);
+            
+            Controls.Remove(numberPicker);
+            Controls.Remove(detailsNum);
+            Controls.Remove(confirm);
+            Controls.Remove(cancel);
+        }
+
+        private void Close_Click(object? sender, EventArgs e)
+        {
+            Controls.Remove(close);
+            Controls.Remove(detailText);
+            Controls.Remove(addDetails);
         }
     }
 }
