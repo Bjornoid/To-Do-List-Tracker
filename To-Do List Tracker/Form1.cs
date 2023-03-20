@@ -186,6 +186,7 @@ namespace To_Do_List_Tracker
 
         private void DisplayTasks()
         {
+            if (toDoListTasks.Count == 0) { return; }
             for (int i = 1; i <= toDoListTasks.Count; i++)
             {
                 TextBox taskBox = new TextBox();
@@ -481,7 +482,10 @@ namespace To_Do_List_Tracker
 
         private void newToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            filePath = "";
 
+            toDoListTasks.Clear();
+            DisplayTasks();
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -507,23 +511,22 @@ namespace To_Do_List_Tracker
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            foreach (Control control in Controls)
+            {
+                if ( control is TextBox )
+                {
+                    ((TextBox)control).Dispose();
+                }
+            }
+
+
             OpenFileDialog open = new OpenFileDialog();
             open.Filter = "To-Do List Text Files (*.txt) | *.txt";
             if (open.ShowDialog() == DialogResult.Cancel) { return; }
             filePath = open.FileName;
 
             StreamReader sr = new StreamReader(filePath);
-
-            for (int i = 1; i <= toDoListTasks.Count; i++)
-            {
-                foreach (Control c in Controls)
-                {
-                    if ( c.Text.StartsWith(i.ToString())) 
-                    {
-                        Controls.Remove(c);
-                    }
-                }
-            }
+            
             toDoListTasks.Clear();
             string taskAndDate = "";
             int count = 0;
