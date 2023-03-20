@@ -186,6 +186,16 @@ namespace To_Do_List_Tracker
 
         private void DisplayTasks()
         {
+            for (int i = 1; i <= 36; i++)
+            {
+                foreach (Control control in Controls)
+                {
+                    if (control.Text.StartsWith(i.ToString()))
+                    {
+                        Controls.Remove(control);
+                    }
+                }
+            }
             if (toDoListTasks.Count == 0) { return; }
             for (int i = 1; i <= toDoListTasks.Count; i++)
             {
@@ -195,7 +205,7 @@ namespace To_Do_List_Tracker
                 {
                     continue;
                 }
-                
+
                 taskBox.AppendText(i.ToString() + " : " + toDoListTasks[i]);
                 if (i < 13)
                 {
@@ -452,7 +462,7 @@ namespace To_Do_List_Tracker
             detailText.Location = new Point(label1.Location.X, label1.Location.Y - 10);
             detailText.Size = new Size(200, 150);
             detailText.Text = details[(int)numberPicker.SelectedIndex];
-            
+
             addDetails = new Label();
             addDetails.Text = "Details: ";
             addDetails.Location = new Point(detailText.Location.X - 80, detailText.Location.Y);
@@ -495,45 +505,30 @@ namespace To_Do_List_Tracker
             if (saveAs.ShowDialog() == DialogResult.Cancel) { return; }
             filePath = saveAs.FileName;
             File.WriteAllText(filePath, "");
-            
+
             for (int i = 1; i <= toDoListTasks.Count; i++)
             {
-                if (details[i - 1] == "" || details[i - 1] == "No Details Yet" || details[i - 1] == null) 
-                {
-                    File.AppendAllText(filePath, toDoListTasks[i] + "~");
-                }
-                else
-                    File.AppendAllText(filePath, toDoListTasks[i] + ".");
-                
+                File.AppendAllText(filePath, toDoListTasks[i] + ".");
                 File.AppendAllText(filePath, details[i - 1] + "~");
             }
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (Control control in Controls)
-            {
-                if ( control is TextBox )
-                {
-                    ((TextBox)control).Dispose();
-                }
-            }
-
-
             OpenFileDialog open = new OpenFileDialog();
             open.Filter = "To-Do List Text Files (*.txt) | *.txt";
             if (open.ShowDialog() == DialogResult.Cancel) { return; }
             filePath = open.FileName;
 
             StreamReader sr = new StreamReader(filePath);
-            
+
             toDoListTasks.Clear();
             string taskAndDate = "";
             int count = 0;
             char temp = ' ';
             int taskNumber = 0;
             string detail = "";
-            
+
             while (!sr.EndOfStream)
             {
                 if (count == 0)
@@ -547,19 +542,10 @@ namespace To_Do_List_Tracker
                         taskAndDate = "";
                         continue;
                     }
-                    else if (temp == '~')
-                    {
-                        count = 0;
-                        toDoListTasks[taskNumber + 1] = taskAndDate;
-                        details[taskNumber] = "No Details Yet";
-                        taskNumber++;
-                        taskAndDate = "";
-                        continue;
-                    }
                     else
                         taskAndDate += temp;
                 }
-                else if (count == 1) 
+                else if (count == 1)
                 {
                     temp = (char)sr.Read();
                     if (temp == '~')
@@ -573,7 +559,40 @@ namespace To_Do_List_Tracker
                     detail += temp;
                 }
             }
+            sr.Close();
             DisplayTasks();
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (filePath != "")
+            {
+                File.WriteAllText(filePath, "");
+            }
+            else
+            {
+                SaveFileDialog saveAs = new SaveFileDialog();
+                saveAs.Filter = "To-Do List Text Files (*.txt) | *.txt";
+                if (saveAs.ShowDialog() == DialogResult.Cancel) { return; }
+                filePath = saveAs.FileName;
+            }
+            for (int i = 1; i <= toDoListTasks.Count; i++)
+            {
+                File.AppendAllText(filePath, toDoListTasks[i] + ".");
+                File.AppendAllText(filePath, details[i - 1] + "~");
+            }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void readHelpMessageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("You Can Add Tasks, and select a due date. \nYou can remove tasks that you have completed or no longer need to do.\n" +
+                            "You can add additional details to each task and view them whenever you need.\n" +
+                            "Finally, you can save the list of tasks and the list of details to be opened later. ", "Program Explanation Message");
         }
     }
 }

@@ -8,23 +8,23 @@
     "net6.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Bjorn\\.nuget\\packages\\": {},
-    "G:\\msdownld.tmp\\NuGetPackages": {}
+    "C:\\Users\\sergi\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Bjorn\\source\\repos\\To-Do-List-Tracker\\To-Do List Tracker\\To-Do List Tracker.csproj",
+      "projectUniqueName": "C:\\Users\\sergi\\Source\\Repos\\To-Do-List-Tracker\\To-Do List Tracker\\To-Do List Tracker.csproj",
       "projectName": "To-Do List Tracker",
-      "projectPath": "C:\\Users\\Bjorn\\source\\repos\\To-Do-List-Tracker\\To-Do List Tracker\\To-Do List Tracker.csproj",
-      "packagesPath": "C:\\Users\\Bjorn\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Bjorn\\source\\repos\\To-Do-List-Tracker\\To-Do List Tracker\\obj\\",
+      "projectPath": "C:\\Users\\sergi\\Source\\Repos\\To-Do-List-Tracker\\To-Do List Tracker\\To-Do List Tracker.csproj",
+      "packagesPath": "C:\\Users\\sergi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\sergi\\Source\\Repos\\To-Do-List-Tracker\\To-Do List Tracker\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "G:\\msdownld.tmp\\NuGetPackages"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Bjorn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\sergi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -33,6 +33,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

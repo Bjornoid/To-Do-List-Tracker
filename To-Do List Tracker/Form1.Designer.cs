@@ -156,6 +156,7 @@
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             saveToolStripMenuItem.Size = new Size(180, 22);
             saveToolStripMenuItem.Text = "Save";
+            saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
             // saveAsToolStripMenuItem
             // 
@@ -169,6 +170,7 @@
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             exitToolStripMenuItem.Size = new Size(180, 22);
             exitToolStripMenuItem.Text = "Exit";
+            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
             // toolStripMenuItem1
             // 
@@ -185,8 +187,9 @@
             // readHelpMessageToolStripMenuItem
             // 
             readHelpMessageToolStripMenuItem.Name = "readHelpMessageToolStripMenuItem";
-            readHelpMessageToolStripMenuItem.Size = new Size(177, 22);
+            readHelpMessageToolStripMenuItem.Size = new Size(180, 22);
             readHelpMessageToolStripMenuItem.Text = "Read Help Message";
+            readHelpMessageToolStripMenuItem.Click += readHelpMessageToolStripMenuItem_Click;
             // 
             // Form1
             // 
