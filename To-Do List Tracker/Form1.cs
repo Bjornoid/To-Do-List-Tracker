@@ -1,3 +1,4 @@
+using Microsoft.VisualBasic;
 using System;
 using System.CodeDom;
 using System.Configuration.Internal;
@@ -17,12 +18,13 @@ namespace To_Do_List_Tracker
 
         private Dictionary<int, string> toDoListTasks = new Dictionary<int, string>();
         private List<string> details = new List<string>(36);
+        private string filePath = "";
 
         private RichTextBox detailText = new RichTextBox();
         private Label addDetails = new Label();
         private List<int> removed = new List<int>();
         private string task = "";
-        private string date = "Today";
+        private string date = "";
         private int taskNumber = 0;
         private int toRemove = 0;
         private int detailsIndex = 0;
@@ -107,8 +109,52 @@ namespace To_Do_List_Tracker
             {
                 taskNumber = toDoListTasks.Count + 1;
             }
+            if (date.Equals(""))
+            {
+                string month = "";
+                switch (DateTime.Today.Month)
+                {
+                    case 1:
+                        month = "January";
+                        break;
+                    case 2:
+                        month = "February";
+                        break;
+                    case 3:
+                        month = "March";
+                        break;
+                    case 4:
+                        month = "April";
+                        break;
+                    case 5:
+                        month = "May";
+                        break;
+                    case 6:
+                        month = "June";
+                        break;
+                    case 7:
+                        month = "July";
+                        break;
+                    case 8:
+                        month = "August";
+                        break;
+                    case 9:
+                        month = "September";
+                        break;
+                    case 10:
+                        month = "October";
+                        break;
+                    case 11:
+                        month = "November";
+                        break;
+                    case 12:
+                        month = "December";
+                        break;
+                }
+                date = DateTime.Today.DayOfWeek.ToString() + ", " + month + " " + DateTime.Today.Day.ToString() + ", " + DateTime.Today.Year.ToString();
+            }
             toDoListTasks[taskNumber] = task + date;
-            details.Add("");
+            details.Add("No Details Yet");
             DisplayTasks();
             Controls.Remove(tempBox);
             Controls.Remove(tempDate);
@@ -148,6 +194,7 @@ namespace To_Do_List_Tracker
                 {
                     continue;
                 }
+                
                 taskBox.AppendText(i.ToString() + " : " + toDoListTasks[i]);
                 if (i < 13)
                 {
@@ -259,6 +306,8 @@ namespace To_Do_List_Tracker
 
         private void button3_Click(object sender, EventArgs e)
         {
+            label1.Hide();
+            label2.Hide();
             if (Controls.Contains(confirm))
                 Controls.Remove(confirm);
             if (Controls.Contains(cancel))
@@ -293,7 +342,7 @@ namespace To_Do_List_Tracker
             numberPicker.SelectedIndex = 0;
             numberPicker.SelectedIndexChanged += NumberPicker_SelectedIndexChanged;
             detailText = new RichTextBox();
-            detailText.Location = new Point(label1.Location.X, label1.Location.Y - 30);
+            detailText.Location = new Point(label1.Location.X, label1.Location.Y - 10);
             detailText.Size = new Size(200, 150);
             addDetails = new Label();
             addDetails.Text = "Add Details: ";
@@ -307,7 +356,7 @@ namespace To_Do_List_Tracker
             cancel = new Button();
             cancel.Size = new Size(60, 23);
             cancel.Text = "Cancel";
-            cancel.Click += Cancel_Click2; 
+            cancel.Click += Cancel_Click2;
             confirm.Location = new Point(button1.Location.X + 115, button1.Location.Y);
             cancel.Location = new Point(button1.Location.X + 115, button1.Location.Y + 32);
 
@@ -322,7 +371,7 @@ namespace To_Do_List_Tracker
         private void Confirm_Click2(object? sender, EventArgs e)
         {
             detailsIndex = (int)numberPicker.SelectedIndex;
-            details.Insert(detailsIndex, detailText.Text);
+            details[detailsIndex] = detailText.Text;
             Controls.Remove(addDetails);
             Controls.Remove(numberPicker);
             Controls.Remove(detailText);
@@ -343,6 +392,8 @@ namespace To_Do_List_Tracker
 
         private void button4_Click(object sender, EventArgs e)
         {
+            label1.Hide();
+            label2.Hide();
             if (Controls.Contains(confirm))
                 Controls.Remove(confirm);
             if (Controls.Contains(cancel))
@@ -390,18 +441,17 @@ namespace To_Do_List_Tracker
             Controls.Add(detailsNum);
             Controls.Add(numberPicker);
             Controls.Add(cancel);
+            Controls.Remove(close);
             Controls.Add(confirm);
         }
 
         private void Confirm_Click3(object? sender, EventArgs e)
         {
             detailText = new RichTextBox();
-            detailText.Location = new Point(label1.Location.X, label1.Location.Y - 30);
+            detailText.Location = new Point(label1.Location.X, label1.Location.Y - 10);
             detailText.Size = new Size(200, 150);
-            if (details[(int)numberPicker.SelectedIndex] == "")
-                detailText.Text = "No Details Yet";
-            else
-                detailText.Text = details[(int)numberPicker.SelectedIndex];
+            detailText.Text = details[(int)numberPicker.SelectedIndex];
+            
             addDetails = new Label();
             addDetails.Text = "Details: ";
             addDetails.Location = new Point(detailText.Location.X - 80, detailText.Location.Y);
@@ -415,7 +465,7 @@ namespace To_Do_List_Tracker
             close.Size = new Size(60, 32);
             close.Click += Close_Click;
             Controls.Add(close);
-            
+
             Controls.Remove(numberPicker);
             Controls.Remove(detailsNum);
             Controls.Remove(confirm);
@@ -427,6 +477,100 @@ namespace To_Do_List_Tracker
             Controls.Remove(close);
             Controls.Remove(detailText);
             Controls.Remove(addDetails);
+        }
+
+        private void newToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveAs = new SaveFileDialog();
+            saveAs.Filter = "To-Do List Text Files (*.txt) | *.txt";
+            if (saveAs.ShowDialog() == DialogResult.Cancel) { return; }
+            filePath = saveAs.FileName;
+            File.WriteAllText(filePath, "");
+            
+            for (int i = 1; i <= toDoListTasks.Count; i++)
+            {
+                if (details[i - 1] == "" || details[i - 1] == "No Details Yet" || details[i - 1] == null) 
+                {
+                    File.AppendAllText(filePath, toDoListTasks[i] + "~");
+                }
+                else
+                    File.AppendAllText(filePath, toDoListTasks[i] + ".");
+                
+                File.AppendAllText(filePath, details[i - 1] + "~");
+            }
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            open.Filter = "To-Do List Text Files (*.txt) | *.txt";
+            if (open.ShowDialog() == DialogResult.Cancel) { return; }
+            filePath = open.FileName;
+
+            StreamReader sr = new StreamReader(filePath);
+
+            for (int i = 1; i <= toDoListTasks.Count; i++)
+            {
+                foreach (Control c in Controls)
+                {
+                    if ( c.Text.StartsWith(i.ToString())) 
+                    {
+                        Controls.Remove(c);
+                    }
+                }
+            }
+            toDoListTasks.Clear();
+            string taskAndDate = "";
+            int count = 0;
+            char temp = ' ';
+            int taskNumber = 0;
+            string detail = "";
+            
+            while (!sr.EndOfStream)
+            {
+                if (count == 0)
+                {
+                    temp = (char)sr.Read();
+                    if (temp == '.')
+                    {
+
+                        count++;
+                        toDoListTasks[taskNumber + 1] = taskAndDate;
+                        taskAndDate = "";
+                        continue;
+                    }
+                    else if (temp == '~')
+                    {
+                        count = 0;
+                        toDoListTasks[taskNumber + 1] = taskAndDate;
+                        details[taskNumber] = "No Details Yet";
+                        taskNumber++;
+                        taskAndDate = "";
+                        continue;
+                    }
+                    else
+                        taskAndDate += temp;
+                }
+                else if (count == 1) 
+                {
+                    temp = (char)sr.Read();
+                    if (temp == '~')
+                    {
+                        count = 0;
+                        details.Insert(taskNumber, detail);
+                        taskNumber++;
+                        detail = "";
+                        continue;
+                    }
+                    detail += temp;
+                }
+            }
+            DisplayTasks();
         }
     }
 }
