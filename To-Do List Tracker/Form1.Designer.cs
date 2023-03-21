@@ -45,6 +45,7 @@
             toolStripMenuItem1 = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
             readHelpMessageToolStripMenuItem = new ToolStripMenuItem();
+            label3 = new Label();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -140,35 +141,35 @@
             // newToolStripMenuItem1
             // 
             newToolStripMenuItem1.Name = "newToolStripMenuItem1";
-            newToolStripMenuItem1.Size = new Size(180, 22);
+            newToolStripMenuItem1.Size = new Size(114, 22);
             newToolStripMenuItem1.Text = "New";
             newToolStripMenuItem1.Click += newToolStripMenuItem1_Click;
             // 
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(180, 22);
+            openToolStripMenuItem.Size = new Size(114, 22);
             openToolStripMenuItem.Text = "Open";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(180, 22);
+            saveToolStripMenuItem.Size = new Size(114, 22);
             saveToolStripMenuItem.Text = "Save";
             saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
             // saveAsToolStripMenuItem
             // 
             saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            saveAsToolStripMenuItem.Size = new Size(180, 22);
+            saveAsToolStripMenuItem.Size = new Size(114, 22);
             saveAsToolStripMenuItem.Text = "Save As";
             saveAsToolStripMenuItem.Click += saveAsToolStripMenuItem_Click;
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(180, 22);
+            exitToolStripMenuItem.Size = new Size(114, 22);
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
@@ -187,15 +188,26 @@
             // readHelpMessageToolStripMenuItem
             // 
             readHelpMessageToolStripMenuItem.Name = "readHelpMessageToolStripMenuItem";
-            readHelpMessageToolStripMenuItem.Size = new Size(180, 22);
+            readHelpMessageToolStripMenuItem.Size = new Size(177, 22);
             readHelpMessageToolStripMenuItem.Text = "Read Help Message";
             readHelpMessageToolStripMenuItem.Click += readHelpMessageToolStripMenuItem_Click;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(1346, 49);
+            label3.Name = "label3";
+            label3.Size = new Size(184, 15);
+            label3.TabIndex = 8;
+            label3.Text = "Made By Bjorn Nordenflycht 2023";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Aquamarine;
             ClientSize = new Size(1530, 650);
+            Controls.Add(label3);
             Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
@@ -204,8 +216,6 @@
             Controls.Add(button1);
             Controls.Add(label1);
             Controls.Add(menuStrip1);
-            label1.Hide();
-            label2.Hide();
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             Text = "TO-DO List Tracker";
@@ -234,5 +244,6 @@
         private ToolStripMenuItem toolStripMenuItem1;
         private ToolStripMenuItem helpToolStripMenuItem;
         private ToolStripMenuItem readHelpMessageToolStripMenuItem;
+        private Label label3;
     }
 }

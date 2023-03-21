@@ -14,6 +14,8 @@ namespace To_Do_List_Tracker
         public Form1()
         {
             InitializeComponent();
+            label1.Hide();
+            label2.Hide();
         }
 
         private Dictionary<int, string> toDoListTasks = new Dictionary<int, string>();
