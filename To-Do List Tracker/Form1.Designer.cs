@@ -204,6 +204,8 @@
             Controls.Add(button1);
             Controls.Add(label1);
             Controls.Add(menuStrip1);
+            label1.Hide();
+            label2.Hide();
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             Text = "TO-DO List Tracker";
